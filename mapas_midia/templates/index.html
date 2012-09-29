@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Google Maps JavaScript API v3 Example: Marker Simple</title>
+    <link href="https://google-developers.appspot.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js" type="text/javascript"></script>
+    <script>
+
+      function initialize() {
+        var myLatlng = new google.maps.LatLng(-22.5,-43);
+        var mapOptions = {
+          zoom: 4,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+        var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: 'Cantina do seu jose!',
+                visible:true
+      });
+          google.maps.event.addListener(
+            marker,
+            "click",
+            function (e) {           
+                var boxText = document.createElement("div");
+                boxText.style.cssText = "border: 1px solid black; margin-top: 8px; background: black; padding: 5px;color:white;";
+                boxText.innerHTML = "Rio de Janeiro <br> Rio de Janeiro";
+                var myOptions = {
+                   content: boxText
+                  ,disableAutoPan: false
+                  ,maxWidth: 0
+                  ,pixelOffset: new google.maps.Size(-140, 0)
+                  ,zIndex: null
+                  ,boxStyle: { 
+                    background: "url('tipbox.gif') no-repeat"
+                    ,opacity: 0.75
+                    ,width: "280px"
+                 }
+                ,closeBoxMargin: "10px 2px 2px 2px"
+                ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+                ,infoBoxClearance: new google.maps.Size(1, 1)
+                ,isHidden: false
+                ,pane: "floatPane"
+                ,enableEventPropagation: false
+             };           
+             var ib = new InfoBox(myOptions);
+              ib.open(map, marker);
+            });
+      };
+      
+
+      
+    </script>
+  </head>
+  <body onload="initialize()">
+    <div id="map_canvas"></div>
+  </body>
+</html>
